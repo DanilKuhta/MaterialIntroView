@@ -25,14 +25,9 @@ public class ViewTarget implements Target{
 
     @Override
     public Rect getRect() {
-        int[] location = new int[2];
-        view.getLocationInWindow(location);
-        return new Rect(
-                location[0],
-                location[1],
-                location[0] + view.getWidth(),
-                location[1] + view.getHeight()
-        );
+        Rect rect = new Rect();
+        view.getGlobalVisibleRect(rect);
+        return rect;
     }
 
     @Override
