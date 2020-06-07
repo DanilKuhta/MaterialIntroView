@@ -393,7 +393,7 @@ public class MaterialIntroView extends RelativeLayout {
      *
      * @param activity
      */
-    private void show(Activity activity) {
+    public void show(Activity activity) {
 
         if (preferencesManager.isDisplayed(materialIntroViewId))
             return;
