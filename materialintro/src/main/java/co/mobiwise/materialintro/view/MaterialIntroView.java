@@ -361,6 +361,13 @@ public class MaterialIntroView extends RelativeLayout {
         float yT = event.getY();
 
         boolean isTouchOnFocus = targetShape.isTouchOnFocus(xT, yT);
+        if (event.getAction() == MotionEvent.ACTION_DOWN && (isTouchOnFocus || dismissOnTouch))
+            dismiss();
+        if (isTouchOnFocus) {
+            if (isPerformClick) {
+                return false;
+            }
+        }
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
@@ -372,18 +379,6 @@ public class MaterialIntroView extends RelativeLayout {
 
                 return true;
             case MotionEvent.ACTION_UP:
-
-                if (isTouchOnFocus || dismissOnTouch)
-                    dismiss();
-
-                if (isTouchOnFocus && isPerformClick) {
-                    targetView.getView().performClick();
-                    targetView.getView().setPressed(true);
-                    targetView.getView().invalidate();
-                    targetView.getView().setPressed(false);
-                    targetView.getView().invalidate();
-                }
-
                 return true;
             default:
                 break;
